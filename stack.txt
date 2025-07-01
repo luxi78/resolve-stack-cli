@@ -1,0 +1,3 @@
+TypeError: Invalid name
+    at nG._onHeadersReceived (https://cdn.xuante.top:44300/cdns1.bangnimang.net/fapiao-ng/_next/static/chunks/9b0008ae-271aa26b9a487cb1.js:1:176771)
+    at nj.onStateChange (https://cdn.xuante.top:44300/cdns1.bangnimang.net/fapiao-ng/_next/static/chunks/9b0008ae-271aa26b9a487cb1.js:1:174923)
