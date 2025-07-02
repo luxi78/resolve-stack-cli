@@ -1,6 +1,6 @@
 {
   "name": "resolve-stack-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A lightweight, fast command-line tool for resolving JavaScript stack traces using source maps",
   "main": "dist/index.js",
   "module": "dist/index.js",

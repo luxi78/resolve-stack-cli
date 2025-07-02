@@ -59,29 +59,77 @@ bun install
 
 ## Usage
 
-### Basic Usage
+### Overview
 
-After installing via npm, use the tool directly:
+Resolve Stack CLI helps you convert minified production stack traces back to their original source code locations using source maps. There are two main ways to use the tool:
 
-```bash
-resolve-stack [options]
-```
+### Method 1: Interactive Input
 
-### Getting Help
+Run the command with your configuration file, then paste the production stack trace:
 
 ```bash
-resolve-stack --help
+resolve-stack -c config.toml
 ```
+
+After running the command, paste your production stack trace (for example):
+
+```
+TypeError: Invalid name
+    at nG._onHeadersReceived (https://cdn.xuante.top:44300/cdns1.bangnimang.net/fapiao-ng/_next/static/chunks/9b0008ae-271aa26b9a487cb1.js:1:176771)
+    at nj.onStateChange (https://cdn.xuante.top:44300/cdns1.bangnimang.net/fapiao-ng/_next/static/chunks/9b0008ae-271aa26b9a487cb1.js:1:174923)
+```
+
+Then press **Ctrl+D** (Linux/Mac) or **Ctrl+Z** (Windows) to finish input. You'll get the resolved stack trace:
+
+```
+TypeError: Invalid name
+    at _onHeadersReceived (webpack://_N_E/pdf.js/src/display/network.js:276:28)
+    const responseHeaders = new Headers();
+                            ^
+    at onStateChange (webpack://_N_E/pdf.js/src/display/network.js:119:21)
+    pendingRequest.onHeadersReceived();
+                   ^
+```
+
+### Method 2: File Input with Pipe
+
+Save your production stack trace to a file and pipe it to the tool:
+
+```bash
+# Save stack trace to a file
+echo "TypeError: Invalid name
+    at nG._onHeadersReceived (https://cdn.xuante.top:44300/cdns1.bangnimang.net/fapiao-ng/_next/static/chunks/9b0008ae-271aa26b9a487cb1.js:1:176771)
+    at nj.onStateChange (https://cdn.xuante.top:44300/cdns1.bangnimang.net/fapiao-ng/_next/static/chunks/9b0008ae-271aa26b9a487cb1.js:1:174923)" > stack.txt
+
+# Process the file
+cat stack.txt | resolve-stack -c config.toml
+```
+
+Both methods produce the same resolved output with original source locations.
 
 ### Command Line Options
-
-The tool uses `yargs` for command-line argument parsing with the following options:
 
 - `-c, --config`: Path to a TOML config file
 - `--app-url-base`: The base URL of your deployed application  
 - `--source-map-root`: The local root directory of your source maps
 - `-h, --help`: Show help
 - `--version`: Show version number
+
+### Quick Start
+
+```bash
+# Install globally
+npm install -g resolve-stack-cli
+
+# Get help
+resolve-stack --help
+
+# Use with config file (interactive)
+resolve-stack -c your-config.toml
+
+# Use with piped input
+cat error-log.txt | resolve-stack -c your-config.toml
+```
 
 <details>
 <summary>Development Usage</summary>
@@ -100,7 +148,6 @@ Resolve Stack CLI supports TOML configuration files for advanced usage scenarios
 
 ```toml
 # example.toml
-[sourcemap]
 appUrlBase = "https://cdn.xuante.top:44300/cdns1.bangnimang.net/fapiao-ng"
 sourceMapRoot = "out"
 ```
