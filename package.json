@@ -1,20 +1,51 @@
 {
   "name": "resolve-stack-cli",
   "version": "1.0.0",
-  "module": "index.ts",
+  "description": "A lightweight, fast command-line tool for resolving JavaScript stack traces using source maps",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "type": "module",
   "bin": {
-    "resolve-stack": "./index.ts"
+    "resolve-stack": "dist/index.js"
   },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "package.json"
+  ],
   "scripts": {
-    "start": "bun run index.ts"
+    "start": "bun run index.ts",
+    "build": "bun build index.ts --outdir dist --target node --format esm",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "stack-trace",
+    "source-map",
+    "cli",
+    "debugging",
+    "typescript",
+    "javascript"
+  ],
+  "author": "luxi78@gmail.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luxi78/resolve-stack-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/luxi78/resolve-stack-cli/issues"
+  },
+  "homepage": "https://github.com/luxi78/resolve-stack-cli#readme",
+  "engines": {
+    "node": ">=16.0.0"
   },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/yargs": "^17.0.33"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
     "@iarna/toml": "^2.2.5",
