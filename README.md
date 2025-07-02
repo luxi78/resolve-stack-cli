@@ -15,61 +15,84 @@ A lightweight, fast command-line tool for resolving JavaScript stack traces usin
 
 ## Installation
 
-### Prerequisites
-
-- [Bun](https://bun.sh) runtime (latest version recommended)
-- TypeScript ^5.0.0
-
-### Global Installation
-
-Install globally from local project:
+### From npm (Recommended)
 
 ```bash
-# Clone or download the project, then:
+# Install globally to use as a CLI tool
+npm install -g resolve-stack-cli
+```
+
+### Prerequisites
+
+- Node.js >=16.0.0
+- npm
+
+### Alternative Installation Methods
+
+<details>
+<summary>For developers and contributors</summary>
+
+#### From Source
+
+```bash
+# Clone the repository
+git clone https://github.com/luxi78/resolve-stack-cli.git
 cd resolve-stack-cli
 bun install
 bun install -g .
 ```
 
-Or install directly from a Git repository:
+#### Development Installation
 
 ```bash
-bun install -g git+https://github.com/username/resolve-stack-cli.git
-```
-
-### Development Installation
-
-For development purposes:
-
-```bash
+# For development purposes
+git clone https://github.com/luxi78/resolve-stack-cli.git
+cd resolve-stack-cli
 bun install
 ```
 
+**Development Prerequisites:**
+- [Bun](https://bun.sh) runtime (latest version recommended)
+- TypeScript ^5.0.0
+
+</details>
+
 ## Usage
 
-### After Global Installation
+### Basic Usage
+
+After installing via npm, use the tool directly:
 
 ```bash
 resolve-stack [options]
 ```
 
-### Development Usage
+### Getting Help
 
 ```bash
-bun run index.ts [options]
+resolve-stack --help
 ```
 
 ### Command Line Options
 
-The tool uses `yargs` for command-line argument parsing. Run with `--help` to see available options:
+The tool uses `yargs` for command-line argument parsing with the following options:
+
+- `-c, --config`: Path to a TOML config file
+- `--app-url-base`: The base URL of your deployed application  
+- `--source-map-root`: The local root directory of your source maps
+- `-h, --help`: Show help
+- `--version`: Show version number
+
+<details>
+<summary>Development Usage</summary>
 
 ```bash
-# If globally installed:
-resolve-stack --help
-
 # If running from source:
+bun run index.ts [options]
 bun run index.ts --help
 ```
+
+</details>
 
 ## Configuration
 
@@ -82,15 +105,32 @@ appUrlBase = "https://cdn.xuante.top:44300/cdns1.bangnimang.net/fapiao-ng"
 sourceMapRoot = "out"
 ```
 
-## Development
+## Dependencies
 
-### Running the Development Version
+- **[@iarna/toml](https://www.npmjs.com/package/@iarna/toml)**: TOML parser for configuration files
+- **[source-map](https://www.npmjs.com/package/source-map)**: Core source map processing library for stack trace resolution
+- **[yargs](https://www.npmjs.com/package/yargs)**: Command-line argument parsing
+
+## License
+
+MIT License
+
+---
+
+## For Developers and Contributors
+
+<details>
+<summary>Development Setup and Guidelines</summary>
+
+### Development
+
+#### Running the Development Version
 
 ```bash
 bun run start
 ```
 
-### Building
+#### Building
 
 This project uses ES modules and is designed to run directly with Bun:
 
@@ -98,28 +138,16 @@ This project uses ES modules and is designed to run directly with Bun:
 bun run index.ts
 ```
 
-## Dependencies
-
-- **[@iarna/toml](https://www.npmjs.com/package/@iarna/toml)**: TOML parser for configuration files
-- **[source-map](https://www.npmjs.com/package/source-map)**: Core source map processing library for stack trace resolution
-- **[yargs](https://www.npmjs.com/package/yargs)**: Command-line argument parsing
-
-## Requirements
+#### Requirements
 
 - Node.js-compatible runtime (Bun recommended)
 - TypeScript ^5.0.0
 
-## Contributing
+### Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
-
-This project is private and not currently licensed for public distribution.
-
----
-
-## 📦 NPM Publishing Guide
+### 📦 NPM Publishing Guide
 
 ### Core Concepts
 
@@ -334,6 +362,8 @@ node dist/index.js --help
 3. **Documentation integrity**: Keep README.md synchronized with features
 4. **License clarity**: Choose appropriate open source license
 5. **Keyword optimization**: Add relevant keywords for discoverability
+
+</details>
 
 ---
 
